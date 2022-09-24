@@ -1,5 +1,10 @@
 package deck
 
+import (
+	"math/rand"
+	"time"
+)
+
 type value struct {
 	n int
 	s string
@@ -52,6 +57,13 @@ func (d Deck) String() string {
 		ret += c.String() + "\n"
 	}
 	return ret
+}
+
+func (d Deck) Shuffle() Deck {
+	// shuffle the cards
+	rand.Seed(time.Now().UnixNano())
+	rand.Shuffle(len(d.Cards), func(i, j int) { d.Cards[i], d.Cards[j] = d.Cards[j], d.Cards[i] })
+	return d
 }
 
 // StandardDeck returns a standard 52 card deck for games like solitaire and poker
