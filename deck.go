@@ -41,12 +41,12 @@ func (c Card) String() string {
 
 // Deck represents a collection of cards that can be leveraged to play games
 type Deck struct {
-	cards []Card
+	Cards []Card
 }
 
 func (d Deck) String() string {
 	ret := ""
-	for _, c := range d.cards {
+	for _, c := range d.Cards {
 		ret += c.String() + "\n"
 	}
 	return ret
@@ -54,7 +54,7 @@ func (d Deck) String() string {
 
 func StandardDeck() Deck {
 	cards := generateStandardCards(suits, values, false)
-	return Deck{cards: cards}
+	return Deck{Cards: cards}
 }
 
 func generateStandardCards(suits []string, values []value, jokers bool) []Card {
