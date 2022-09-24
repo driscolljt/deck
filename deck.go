@@ -6,7 +6,7 @@ type value struct {
 	l string
 }
 
-var suits = []string{"Hearts", "Diamonds", "Spades", "Clubs"}
+var suits = []string{"Spades", "Diamonds", "Clubs", "Hearts"}
 
 var values = []value{
 	// {n: 0, s: "*", l: "Joker"},
