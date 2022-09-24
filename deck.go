@@ -10,7 +10,7 @@ var suits = []string{"Spades", "Diamonds", "Clubs", "Hearts"}
 
 var values = []value{
 	// {n: 0, s: "*", l: "Joker"},
-	{n: 1, s: "1", l: "One"},
+	{n: 1, s: "1", l: "Ace"},
 	{n: 2, s: "2", l: "Two"},
 	{n: 3, s: "3", l: "Three"},
 	{n: 4, s: "4", l: "Four"},
@@ -31,6 +31,7 @@ type Card struct {
 	value value
 }
 
+// String returns a string representation of the Card
 func (c Card) String() string {
 	if c.value.n != 0 {
 		return ("" + c.value.l + " of " + c.suit)
@@ -44,6 +45,7 @@ type Deck struct {
 	Cards []Card
 }
 
+// String returns a string representation of the entire Deck
 func (d Deck) String() string {
 	ret := ""
 	for _, c := range d.Cards {
@@ -52,21 +54,28 @@ func (d Deck) String() string {
 	return ret
 }
 
+// StandardDeck returns a standard 52 card deck for games like solitaire and poker
 func StandardDeck() Deck {
 	cards := generateStandardCards(suits, values, false)
 	return Deck{Cards: cards}
 }
 
+// StandardDeckWithJokers returns a standard 52 card deck, plus two Jokers
+func StandardDeckWithJokers() Deck {
+	cards := generateStandardCards(suits, values, true)
+	return Deck{Cards: cards}
+}
+
 func generateStandardCards(suits []string, values []value, jokers bool) []Card {
 	newCards := []Card{}
+	if jokers {
+		newCards = append(newCards, Card{suit: "*", value: value{n: 0, s: "*", l: "Joker"}})
+		newCards = append(newCards, Card{suit: "*", value: value{n: 0, s: "*", l: "Joker"}})
+	}
 	for _, s := range suits {
 		for _, v := range values {
 			newCards = append(newCards, Card{suit: s, value: v})
 		}
-	}
-	if jokers {
-		newCards = append(newCards, Card{suit: "*", value: value{n: 0, s: "*", l: "Joker"}})
-		newCards = append(newCards, Card{suit: "*", value: value{n: 0, s: "*", l: "Joker"}})
 	}
 	return newCards
 }
