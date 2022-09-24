@@ -31,9 +31,25 @@ type Card struct {
 	value value
 }
 
+func (c Card) String() string {
+	if c.value != 0 {
+		return ("" + c.value.l + " of " + c.suit)
+	} else {
+		return c
+	}
+}
+
 // Deck represents a collection of cards that can be leveraged to play games
 type Deck struct {
 	cards []Card
+}
+
+func (d Deck) String() string {
+	ret := ""
+	for _, c := range d.cards {
+		ret += c.String() + "\n"
+	}
+	return ret
 }
 
 func StandardDeck() Deck {
