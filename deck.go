@@ -32,10 +32,10 @@ type Card struct {
 }
 
 func (c Card) String() string {
-	if c.value != 0 {
+	if c.value.n != 0 {
 		return ("" + c.value.l + " of " + c.suit)
 	} else {
-		return c
+		return ("" + c.value.l + " | " + c.suit)
 	}
 }
 
